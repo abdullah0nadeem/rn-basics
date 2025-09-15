@@ -2,7 +2,8 @@ import React from "react";
 import { Text } from "react-native";
 
 const Cat = () => {
-  return <Text>Hello, I'm your cat!</Text>;
+  const name = "Meow";
+  return <Text>Hello, I'm your {name}!</Text>;
 };
 
 export default Cat;
