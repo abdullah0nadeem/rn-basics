@@ -26,4 +26,14 @@ const CustomCat = () => {
   );
 };
 
-export default CustomCat;
+const Cafe = () => {
+  return (
+    <View>
+      <Cat />
+      <Cat />
+      <Cat />
+    </View>
+  );
+};
+
+export default Cafe;
