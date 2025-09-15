@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, TextInput, View } from "react-native";
 
 const getFullName = (firstName: string, lastName: string) => {
   return `${firstName} ${lastName}`;
@@ -10,4 +10,20 @@ const Cat = () => {
   return <Text>Hello, I'm your {getFullName("Meow", "Meow")}!</Text>;
 };
 
-export default Cat;
+const CustomCat = () => {
+  return (
+    <View>
+      <Text>Hello, I'm a cat!</Text>
+      <TextInput
+        style={{
+          height: 50,
+          borderColor: "gray",
+          borderWidth: 1,
+        }}
+        defaultValue="Name me!"
+      />
+    </View>
+  );
+};
+
+export default CustomCat;
