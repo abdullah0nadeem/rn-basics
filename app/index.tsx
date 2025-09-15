@@ -9,7 +9,7 @@ const Cat = (props: CatProps) => {
   const [isHungary, setIsHungary] = useState(true);
 
   return (
-    <View>
+    <>
       <Text>
         Hello, I'm your {props.name}!, and I am {isHungary ? "Hungary" : "Full"}
       </Text>
@@ -19,7 +19,7 @@ const Cat = (props: CatProps) => {
         disabled={!isHungary}
         color={isHungary ? "indigo" : "gray"}
       />
-    </View>
+    </>
   );
 };
 
