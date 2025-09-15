@@ -1,13 +1,12 @@
 import React from "react";
 import { Text, TextInput, View } from "react-native";
 
-const getFullName = (firstName: string, lastName: string) => {
-  return `${firstName} ${lastName}`;
+type CatProps = {
+  name: string;
 };
 
-const Cat = () => {
-  const name = "Meow";
-  return <Text>Hello, I'm your {getFullName("Meow", "Meow")}!</Text>;
+const Cat = (props: CatProps) => {
+  return <Text>Hello, I'm your {props.name}!</Text>;
 };
 
 const CustomCat = () => {
@@ -29,9 +28,9 @@ const CustomCat = () => {
 const Cafe = () => {
   return (
     <View>
-      <Cat />
-      <Cat />
-      <Cat />
+      <Cat name="Meow" />
+      <Cat name="Jerry" />
+      <Cat name="Tom" />
     </View>
   );
 };
