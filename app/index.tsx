@@ -1,12 +1,31 @@
 import React from "react";
-import { Text, TextInput, View } from "react-native";
+import { Image, Text, TextInput, View } from "react-native";
 
 type CatProps = {
   name: string;
 };
 
 const Cat = (props: CatProps) => {
-  return <Text>Hello, I'm your {props.name}!</Text>;
+  return (
+    <View>
+      {/* <Image
+        src="https://reactnative.dev/docs/assets/p_cat1.png"
+        style={{
+          width: 200,
+          height: 200,
+        }}
+      /> */}
+
+      <Image
+        source={{ uri: "https://reactnative.dev/docs/assets/p_cat1.png" }}
+        style={{
+          width: 200,
+          height: 200,
+        }}
+      />
+      <Text>Hello, I'm your {props.name}!</Text>
+    </View>
+  );
 };
 
 const CustomCat = () => {
