@@ -1,29 +1,24 @@
-import React from "react";
-import { Image, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { Button, Text, TextInput, View } from "react-native";
 
 type CatProps = {
   name: string;
 };
 
 const Cat = (props: CatProps) => {
+  const [isHungary, setIsHungary] = useState(true);
+
   return (
     <View>
-      {/* <Image
-        src="https://reactnative.dev/docs/assets/p_cat1.png"
-        style={{
-          width: 200,
-          height: 200,
-        }}
-      /> */}
-
-      <Image
-        source={{ uri: "https://reactnative.dev/docs/assets/p_cat1.png" }}
-        style={{
-          width: 200,
-          height: 200,
-        }}
+      <Text>
+        Hello, I'm your {props.name}!, and I am {isHungary ? "Hungary" : "Full"}
+      </Text>
+      <Button
+        onPress={() => setIsHungary(false)}
+        title={isHungary ? "Please give me some food" : "Thank you!"}
+        disabled={!isHungary}
+        color={isHungary ? "indigo" : "gray"}
       />
-      <Text>Hello, I'm your {props.name}!</Text>
     </View>
   );
 };
