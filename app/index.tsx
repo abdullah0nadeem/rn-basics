@@ -1,47 +1,73 @@
 import React from "react";
-import { SectionList, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const RNBSectionList = () => {
-  const data = [
-    { title: "N", data: ["Name 1", "Name 2", "Name 3", "Name 4", "Name 5"] },
-    {
-      title: "J",
-      data: [
-        "J Name 1",
-        "J Name 2",
-        "Name 3",
-        "J Name 4",
-        "J Name 5",
-        "J Name 6",
-        "J Name 7",
-        "Name 8",
-        "J Name 9",
-        "J Name 10",
-      ],
-    },
-  ];
+import PostItImage from "@/assets/images/post-it.png";
+import { useRouter } from "expo-router";
+
+const HomeScreen = () => {
+  const router = useRouter();
 
   return (
-    <SectionList
-      sections={data}
-      renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
-      renderSectionHeader={({ section }) => (
-        <Text style={styles.section}>{section.title}</Text>
-      )}
-      keyExtractor={(item) => `key-${item}`}
-    />
+    <View style={styles.continer}>
+      <Image source={PostItImage} style={styles.image} />
+      <Text style={styles.title}>Welcome to Notes App</Text>
+      <Text style={styles.subtitle}>
+        Capture your toughts anytime, anywhere
+      </Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => router.push("/notes")}
+      >
+        <Text style={styles.buttonText}>Get Started</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  section: {
-    padding: 8,
-    backgroundColor: "lightgray",
+  continer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#f8f9fa",
   },
-  item: {
-    margin: 8,
+  image: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#333",
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#666",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: "#007bff",
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
     fontSize: 18,
+    fontWeight: "bold",
+  },
+  centeredContainter: {
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
   },
 });
 
-export default RNBSectionList;
+export default HomeScreen;
