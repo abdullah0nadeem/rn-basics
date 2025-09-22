@@ -1,6 +1,5 @@
 import AddNoteModal from "@/components/AddNoteModal";
 import NoteList from "@/components/NoteList";
-import { Note } from "@/interfaces/Note";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 

@@ -1,4 +1,3 @@
-import { Note } from "@/interfaces/Note";
 import React from "react";
 import { FlatList, View } from "react-native";
 import NoteItem from "./NoteItem";
