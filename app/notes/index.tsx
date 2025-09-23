@@ -1,6 +1,8 @@
 import AddNoteModal from "@/components/AddNoteModal";
 import NoteList from "@/components/NoteList";
-import notesService from "@/services/notes";
+import { useAuth } from "@/contexts/AuthContext";
+import notesService from "@/services/notesService";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -12,6 +14,9 @@ import {
 } from "react-native";
 
 const NotesScreen = () => {
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
+
   const [notes, setNotes] = useState<Note[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [newNote, setNewNote] = useState("");
@@ -19,14 +24,22 @@ const NotesScreen = () => {
   const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
-    fetchNotes();
+    if (!authLoading && !user) {
+      router.replace("/auth");
+    }
+  }, [user, authLoading]);
+
+  useEffect(() => {
+    if (user) {
+      fetchNotes();
+    }
   }, []);
 
   const fetchNotes = async () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await notesService.getNotes();
+    const response = await notesService.getNotes(user?.uid || "");
 
     if ("error" in response) {
       setError(response.error);
@@ -41,7 +54,7 @@ const NotesScreen = () => {
   const addNote = async () => {
     if (newNote.trim() === "") return;
 
-    const response = await notesService.addNote(newNote);
+    const response = await notesService.addNote(user?.uid || "", newNote);
 
     if ("error" in response) {
       Alert.alert("Error:", `${response.error}`);
@@ -60,7 +73,11 @@ const NotesScreen = () => {
       return;
     }
 
-    const response = await notesService.updateNote(id, newText);
+    const response = await notesService.updateNote(
+      user?.uid || "",
+      id,
+      newText
+    );
 
     if ("error" in response) {
       Alert.alert("Error:", `${response.error}`);
@@ -81,7 +98,7 @@ const NotesScreen = () => {
         text: "Delete",
         style: "destructive",
         onPress: async () => {
-          const response = await notesService.deleteNote(id);
+          const response = await notesService.deleteNote(user?.uid || "", id);
           if ("error" in response) {
             Alert.alert("Error:", `${response.error}`);
           } else {
